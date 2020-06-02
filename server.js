@@ -1,14 +1,18 @@
-/*const http = require('http');
+// ExpressJS
 
-const hostname = '127.0.0.1';
-const port = 3000;
+// Import packages
+const express = require('express')
+const path = require("path");
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Welcome to Pi NAS');
-});
+const app = express()
+const port = 3000
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});*/
+// Default route
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')))
+// Write route
+app.route('/write', (req, res) => res.send('Here you can write to the storage'))
+// Read route
+app.route('/read', (req, res) => res.send('Here yu can read the storage'))
+
+// Server start with listening calls for incoming requests
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
